@@ -46,7 +46,7 @@ echo "###############"
 
 echo "###############"
 echo "##### VIM PLUGINS #####"
-cd ~ && vim +PluginInstall +qall
+cd ~ && vim +PluginUpdate +qall
 
 echo "###############"
 echo "##### OTHERS #####"
