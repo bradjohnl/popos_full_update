@@ -1,0 +1,62 @@
+#!/bin/bash
+# Inspired by: https://mutschler.eu/linux/install-guides/pop-os-post-install/#install-updates-and-reboot
+
+set -e
+
+echo "###############"
+echo "##### APT #####"
+echo -e "\n### apt autoremove ###"
+sudo apt autoremove
+echo -e "\n### apt autoclean ###"
+sudo apt autoclean
+echo -e "\n### apt update ###"
+sudo apt update
+echo -e "\n### apt upgrade ###"
+sudo apt upgrade
+echo -e "\n### apt dist-upgrade ###"
+sudo apt dist-upgrade
+echo -e "###############\n\n"
+
+echo "###############"
+echo "##### FWUPDMGR #####"
+echo -e "\n### fwupdmgr get-devices ###"
+sudo fwupdmgr get-devices
+echo -e "\n### fwupdmgr get-updates ###"
+
+#Return error if no updates, hence the workaround (TODO: find better way to handle)
+set +e
+sudo fwupdmgr get-updates
+
+echo -e "\n### fwupdmgr update ###"
+sudo fwupdmgr update
+set -e
+echo -e "\n###############"
+
+echo "###############"
+echo "##### FLATPAK #####"
+echo -e "\n### flatpak update ###"
+flatpak update
+echo -e "###############\n\n"
+
+echo "###############"
+echo "##### SNAP #####"
+echo -e "\n### snap refresh ###"
+sudo snap refresh
+echo "###############"
+
+echo "###############"
+echo "##### VIM PLUGINS #####"
+cd ~ && vim +PluginInstall +qall
+
+echo "###############"
+echo "##### OTHERS #####"
+echo -e "\n### p10k  ###"
+git -C ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k pull
+
+echo -e "\n### zsh-autocomplete  ###"
+git -C ~/Git/zsh-autocomplete pull
+
+echo -e "\n### YouCompleteMe ###"
+git -C ~/.vim/bundle/YouCompleteMe pull
+
+
