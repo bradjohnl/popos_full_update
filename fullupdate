@@ -38,6 +38,11 @@ echo -e "\n### flatpak update ###"
 flatpak update
 echo -e "###############\n\n"
 
+echo -e "\n### flatpak repair ###"
+flatpak --user repair
+echo -e "###############\n\n"
+
+
 echo "###############"
 echo "##### SNAP #####"
 echo -e "\n### snap refresh ###"
