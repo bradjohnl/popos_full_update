@@ -1,0 +1,33 @@
+# Enable/disable update sections
+sections:
+  apt:
+    enable: true
+    autoclean: true
+    autoremove: true
+  fwupdmgr:
+    enable: true
+  flatpak:
+    enable: true
+    repair: true
+  snap:
+    enable: true
+  vim_plugins:
+    enable: true
+  powerlevel10k:
+    enable: true
+  zsh_autocomplete:
+    enable: true
+  git_repos:
+    enable: true
+    paths:
+      - ~/Git
+      - ~/.vim/bundle
+      - ~/Documents/MyProjects
+    exclude:
+      - ~/Git/experimental
+
+# Timeshift snapshot configuration
+timeshift:
+  enable: true
+  comment: "Pre-update snapshot"
+  tags: [B]  # Valid options: O(On-demand), B(Boot), H(Hourly), D(Daily), W(Weekly), M(Monthly)
