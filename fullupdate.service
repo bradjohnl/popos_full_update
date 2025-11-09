@@ -1,0 +1,13 @@
+[Unit]
+Description=System Update via fullupdate script
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/keepupdragon/Obsidian/MyGit/popos_full_update/fullupdate
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=Weekly system update timer
+Requires=fullupdate.service
+
+[Timer]
+# Run every Sunday at 3 AM
+OnCalendar=Sun *-*-* 03:00:00
+# If system was off, run 1 hour after boot
+OnBootSec=1h
+# Run immediately if last run was more than 8 days ago
+Persistent=true
+
+[Install]
+WantedBy=timers.target

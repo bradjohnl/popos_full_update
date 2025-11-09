@@ -130,6 +130,49 @@ FULLUPDATE_FROM=git_repos FULLUPDATE_TIMESHIFT=0 ./fullupdate
 2. Command-line options (`-s`, `-f`) come next
 3. Config file settings are used last
 
+## Automated Updates (systemd timer)
+
+To set up weekly automated updates:
+
+```bash
+./install-timer.sh
+```
+
+This installs a systemd timer that runs every Sunday at 3 AM. If the system is off at that time, it will run 1 hour after boot.
+
+### Managing the timer
+```bash
+# Check timer status
+sudo systemctl status fullupdate.timer
+
+# View next scheduled run
+systemctl list-timers fullupdate.timer
+
+# Run manually
+sudo systemctl start fullupdate.service
+
+# Disable automated updates
+sudo systemctl disable --now fullupdate.timer
+
+# Re-enable automated updates
+sudo systemctl enable --now fullupdate.timer
+
+# View logs from last run
+journalctl -u fullupdate.service -n 50
+```
+
+### Customizing schedule
+Edit `/etc/systemd/system/fullupdate.timer` and modify the `OnCalendar` line:
+- `OnCalendar=daily` - Run daily at midnight
+- `OnCalendar=Mon *-*-* 02:00:00` - Every Monday at 2 AM
+- `OnCalendar=*-*-* 04:00:00` - Every day at 4 AM
+
+After editing, reload systemd:
+```bash
+sudo systemctl daemon-reload
+sudo systemctl restart fullupdate.timer
+```
+
 ## Troubleshooting
 **Missing yq error**:  
 Install yq via apt or snap as shown in Requirements section.
@@ -144,6 +187,7 @@ The script will use default settings if no config is found.
 - [ ] AppImage update support
 - [ ] Obsidian plugin updates
 - [ ] CI/CD pipeline integration
+- [x] Automated updates via systemd timer (v1.4)
 - [x] Command-line section selection (v1.2)
 - [x] Start from specific component (v1.3)
 
