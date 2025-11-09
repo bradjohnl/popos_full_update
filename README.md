@@ -30,19 +30,32 @@ chmod +x fullupdate
 1. Edit `.fullupdate_config.yaml` to enable/disable sections:
 ```yaml
 sections:
-  apt: 
+  apt:
     enable: true
     autoclean: true
     autoremove: true
-  fwupdmgr: true
-  flatpak: 
+  fwupdmgr:
+    enable: true
+  flatpak:
     enable: true
     repair: true
+  snap:
+    enable: true
+  vim_plugins:
+    enable: true
+  git_repos:
+    enable: true
+    paths:
+      - ~/Git
+      - ~/.vim/bundle
+      - ~/Documents/MyProjects
+    exclude:
+      - ~/Git/experimental
 
 timeshift:
   enable: true
   comment: "Pre-update snapshot"
-  tags: [update, automated]
+  tags: [B]  # Valid options: O(On-demand), B(Boot), H(Hourly), D(Daily), W(Weekly), M(Monthly)
 ```
 
 ## Usage

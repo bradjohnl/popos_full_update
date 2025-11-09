@@ -11,11 +11,7 @@ sections:
     repair: true
   snap: 
     enable: true
-  vim_plugins: 
-    enable: true
-  powerlevel10k: 
-    enable: true
-  zsh_autocomplete: 
+  vim_plugins:
     enable: true
   git_repos:
     enable: true
